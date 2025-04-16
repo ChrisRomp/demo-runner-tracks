@@ -42,7 +42,7 @@ function setBibFromUrl() {
     if (bibNumber) {
         elements.bibNumberInput().value = bibNumber;
     }
-    // display bib number in message
+    elements.messageDiv().innerHTML = `Bib number <strong>${bibNumber}</strong> loaded from URL`;
 }
 
 // Handle form submission
