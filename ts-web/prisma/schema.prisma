@@ -1,0 +1,78 @@
+datasource db {
+  provider = "sqlite"
+  url      = "file:../data/dev.db"
+}
+
+generator client {
+  provider = "prisma-client-js"
+}
+
+// Represents a marathon or racing event
+model Race {
+  id           Int           @id @default(autoincrement())
+  name         String
+  distance     Float
+  location     String
+  dateTime     DateTime
+  
+  // Relations
+  participants RaceResult[]
+  checkpoints  Checkpoint[]
+}
+
+// Represents an individual runner
+model Runner {
+  id    Int          @id @default(autoincrement())
+  name  String
+  age   Int
+  
+  // Relations
+  races RaceResult[]
+}
+
+// Represents a runner's participation in a race
+model RaceResult {
+  id                    Int               @id @default(autoincrement())
+  bibNumber             Int
+  startTime             DateTime?
+  endTime               DateTime?
+  elapsedTimeInSeconds  Int?
+  runnerAge             Int?
+  runnerName            String?
+  
+  // Relations
+  race                  Race              @relation(fields: [raceId], references: [id])
+  raceId                Int
+  runner                Runner            @relation(fields: [runnerId], references: [id])
+  runnerId              Int
+  splits                CheckpointEvent[]
+
+  @@unique([raceId, bibNumber])
+}
+
+// Represents a checkpoint location in a race
+model Checkpoint {
+  id          Int         @id @default(autoincrement())
+  location    Float
+  description String
+  
+  // Relations
+  race        Race        @relation(fields: [raceId], references: [id])
+  raceId      Int
+  events      CheckpointEvent[]
+}
+
+// Represents a runner passing through a checkpoint
+model CheckpointEvent {
+  id           Int        @id @default(autoincrement())
+  eventTime    DateTime
+  
+  // Relations
+  checkpoint   Checkpoint @relation(fields: [checkpointId], references: [id])
+  checkpointId Int
+  raceResult   RaceResult @relation(fields: [raceId, bibNumber], references: [raceId, bibNumber])
+  raceId       Int
+  bibNumber    Int
+
+  @@unique([checkpointId, raceId, bibNumber])
+}

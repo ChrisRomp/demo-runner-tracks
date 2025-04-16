@@ -1,0 +1,27 @@
+{
+    "github.copilot.chat.codeGeneration.instructions": [
+        {
+            "file": "ts-web/prisma/schema.prisma"
+        }
+    ],
+    "cSpell.words": [
+        "autoincrement",
+        "autouse",
+        "codespace",
+        "elif",
+        "endfor",
+        "executescript",
+        "lastrowid",
+        "RFID",
+        "tailwindcss"
+    ],
+    "python.testing.pytestArgs": [
+        "iot"
+    ],
+    "python.testing.unittestEnabled": false,
+    "python.testing.pytestEnabled": true,
+    "workbench.sideBar.location": "left",
+    "chat.promptFiles": true,
+    "github.copilot.nextEditSuggestions.enabled": true,
+    "github.copilot.chat.advanced.inlineEdits.hideInternalInterface": true,
+}

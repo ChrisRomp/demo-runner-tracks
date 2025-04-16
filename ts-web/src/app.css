@@ -1,0 +1,16 @@
+/* src/app.css */
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+.header-banner {
+    @apply relative w-full p-2 mt-0 text-xl font-semibold text-center text-gray-900 bg-center bg-cover sm:text-3xl bg-banner sm:p-6 sm:rounded-t-lg bg-blend-overlay;
+}
+
+.header-banner h2 {
+    @apply inline-block p-2 mx-auto bg-white bg-opacity-50 rounded-lg backdrop-blur;
+}
+
+body {
+  @apply bg-gray-900;
+}

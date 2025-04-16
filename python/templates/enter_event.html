@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Checkpoint Recording</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='site.css') }}">
+</head>
+<body>
+    <h1>Record Checkpoint Event</h1>
+    <form id="checkpointForm">
+        <div class="form-group">
+            <label for="checkpoint">Checkpoint:</label>
+            <select id="checkpoint" required></select>
+        </div>
+        <div class="form-group">
+            <label for="bibNumber">Bib Number:</label>
+            <input type="number" id="bibNumber" required>
+        </div>
+        <button type="submit">Record Event</button>
+    </form>
+    <div id="message"></div>
+
+    <script src="{{ url_for('static', filename='enter-event.js') }}"></script>
+</body>
+</html>

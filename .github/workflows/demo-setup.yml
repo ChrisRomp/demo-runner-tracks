@@ -1,0 +1,41 @@
+name: Setup demo
+on:
+  # Allows for manual trigger
+  workflow_dispatch:
+  # Runs when repository is created
+  push:
+    branches:
+      - main
+
+permissions: write-all
+
+jobs:
+  setup:
+    # Block if the repository is a template
+    if: ${{ github.event.repository.is_template == false }}
+
+    runs-on: ubuntu-latest
+    steps:
+      # Get the source code
+      - name: Checkout repository
+        uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+
+      # Configure Git
+      - name: Configure Git
+        run: |
+          git config --global user.name 'GeekTrainer'
+          git config --global user.email 'geektrainer@github.com'
+      
+      # Create new branch and add security flaw
+      - name: Create branch and update enter-event.js
+        run: |
+          git checkout -b update-bib-message
+          sed -i 's/\/\/ display bib number in message/elements.messageDiv().innerHTML = `Bib number <strong>${bibNumber}<\/strong> loaded from URL`;/' python/static/enter-event.js
+          git add python/static/enter-event.js
+          git commit -m "feat: update bib number message display"
+          git push origin update-bib-message
+      
+      ## NOTE: The workflow can't automatically create a PR as it won't trigger the CodeQL workflow
+      ## The user will need to create the PR manually
